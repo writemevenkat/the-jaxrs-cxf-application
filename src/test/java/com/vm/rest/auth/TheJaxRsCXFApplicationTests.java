@@ -1,4 +1,4 @@
-package com.ranga.ecommerce.thedeals;
+package com.vm.rest.auth;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
