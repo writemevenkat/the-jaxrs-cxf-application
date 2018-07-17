@@ -17,6 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.vm.rest.auth.service.impl.DealsServiceImpl;
 
@@ -59,7 +62,8 @@ public class TheJaxRsCXFApplication {
 	public OAuthRequestFilter oAuthRequestFilter() {
 		OAuthRequestFilter filter = new OAuthRequestFilter();
 		filter.setTokenValidator(accessTokenValidatorClient());
-//		filter.setTokenValidator(new JwtAccessTokenValidator());//this didnt work at all
+		// filter.setTokenValidator(new JwtAccessTokenValidator());//this didnt work at
+		// all
 		return filter;
 	}
 
@@ -79,4 +83,15 @@ public class TheJaxRsCXFApplication {
 		return factory.createWebClient();
 	}
 
+	@Bean
+	CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration configuration = new CorsConfiguration();
+		configuration.setAllowedOrigins(Arrays.asList("http://localhost:8080"));
+		configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
+		configuration.setAllowCredentials(true);
+		configuration.addAllowedHeader("Authorization");
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", configuration);
+		return source;
+	}
 }

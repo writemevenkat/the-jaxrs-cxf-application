@@ -9,12 +9,12 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.stereotype.Service;
 
 @Service
-@Path("/deals")
+@Path("/private")
 public interface DealsService {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/list/{id}")
+	@Path("/deal/{id}")
 	String list(@PathParam("id") String id);
 
 }
